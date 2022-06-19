@@ -85,7 +85,11 @@ function create ()
 
     platforms = this.physics.add.staticGroup();
 
+    platforms.create(0, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(200, 568, 'ground').setScale(2).refreshBody();
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(600, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(800, 568, 'ground').setScale(2).refreshBody();
 
     platforms.create(600, 400, 'ground');
     platforms.create(50, 250, 'ground');
@@ -97,7 +101,7 @@ function create ()
     movingPlatform.body.allowGravity = false;
     movingPlatform.setVelocityX(50);
 
-    player = this.physics.add.sprite(100, 450, 'dude');
+    player = this.physics.add.sprite(200, 450, 'dude');
 
     player.setBounce(0.0);
     player.setCollideWorldBounds(true);
@@ -126,7 +130,7 @@ function update ()
     }
 
     //jump
-    if (cursors.up.isDown) //&& player.body.touching.down)
+    if (cursors.up.isDown && player.body.touching.down)
     {
         player.setVelocityY(-220);
     }
