@@ -95,15 +95,19 @@ function create ()
     platforms.create(700, 568, 'ground').setScale(2).refreshBody();
     platforms.create(800, 568, 'ground').setScale(2).refreshBody();
 
-    platforms.create(600, 400, 'ground');
-    platforms.create(50, 250, 'ground');
-    platforms.create(750, 220, 'ground');
+    platforms.create(600, 400, 'ground').setScale(2).refreshBody();
+    platforms.create(100, 250, 'ground').setScale(2).refreshBody();
+    platforms.create(750, 220, 'ground').setScale(2).refreshBody();
 
     movingPlatform = this.physics.add.image(400, 400, 'ground');
+    movingPlatform2 = this.physics.add.image(200, 300, 'ground');
 
     movingPlatform.setImmovable(true);
     movingPlatform.body.allowGravity = false;
     movingPlatform.setVelocityX(50);
+    movingPlatform2.setImmovable(true);
+    movingPlatform2.body.allowGravity = false;
+    movingPlatform2.setVelocityX(50);
 
     player = this.physics.add.sprite(200, 450, 'dude');
 
@@ -115,6 +119,7 @@ function create ()
   
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(player, movingPlatform);
+    this.physics.add.collider(player, movingPlatform2);
 }
 
 function update ()
@@ -151,5 +156,14 @@ function update ()
     else if (movingPlatform.x <= 300)
     {
         movingPlatform.setVelocityX(50);
+    }
+
+    if (movingPlatform2.x >= 600)
+    {
+        movingPlatform2.setVelocityX(-50);
+    }
+    else if (movingPlatform2.x <= 200)
+    {
+        movingPlatform2.setVelocityX(50);
     }
 }
