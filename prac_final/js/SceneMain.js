@@ -86,9 +86,13 @@ function create ()
     platforms = this.physics.add.staticGroup();
 
     platforms.create(0, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(100, 568, 'ground').setScale(2).refreshBody();
     platforms.create(200, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(300, 568, 'ground').setScale(2).refreshBody();
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(500, 568, 'ground').setScale(2).refreshBody();
     platforms.create(600, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(700, 568, 'ground').setScale(2).refreshBody();
     platforms.create(800, 568, 'ground').setScale(2).refreshBody();
 
     platforms.create(600, 400, 'ground');
@@ -132,7 +136,7 @@ function update ()
     //jump
     if (cursors.up.isDown && player.body.touching.down)
     {
-        player.setVelocityY(-220);
+        player.setVelocityY(-320);
     }
 
     if (cursors.down.isDown) 
