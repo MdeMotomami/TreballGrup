@@ -1,0 +1,147 @@
+var isPaused = false;
+var isGameOver = false;
+
+function runGame(){
+    if (condicio_mort){
+        clearInterval(interval);
+        gameOver();
+        return;
+    }
+}
+
+document.addEventListener('keyup', function(e)
+{
+    if(e.which == 32 && isGameOver == false){
+        if(isPaused) resumeGame();
+        else pauseGame()
+    }
+});
+
+function pauseGame(){
+    clearInterval(interval);
+    isPaused = true;
+    canvas.style.opacity = 0.5;
+    canvasContext.font = "90px tahoma";
+    canvasContext.fillStyle = "white";
+    canvasContext.textAlign = "center";
+    canvasContext.textBaseline = "middle";
+    canvasContext.fillText("Game Paused", 400, 250);
+}
+
+function resumeGame(){
+    isPaused = false;
+    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.style.opacity = 1;
+    interval = setInterval(runGame, 20);
+}
+
+function gameOver(){
+    isGameOver = true;
+    canvas.style.opacity = 0.5;
+    canvasContext.font = "90px tahoma";
+    canvasContext.fillStyle = "white";
+    canvasContext.textAlign = "center";
+    canvasContext.textBaseline = "middle";
+    canvasContext.fillText("Game Over", 400, 170);
+    canvasContext.fillText("You Scored" + score, 400, 330);
+}
+
+var config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    parent: 'phaser-example',
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+var player;
+var platforms;
+var cursors;
+var movingPlatform;
+
+var game = new Phaser.Game(config);
+
+function preload ()
+{
+    this.load.image('sky', 'prac_final/assets/sky.png');
+    this.load.image('ground', 'prac_final/assets/block1.png');
+    this.load.image('dude', 'prac_final/assets/robotiko.png' )
+}
+
+function create ()
+{
+    this.add.image(400, 300, 'sky');
+
+    platforms = this.physics.add.staticGroup();
+
+    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+
+    platforms.create(600, 400, 'ground');
+    platforms.create(50, 250, 'ground');
+    platforms.create(750, 220, 'ground');
+
+    movingPlatform = this.physics.add.image(400, 400, 'ground');
+
+    movingPlatform.setImmovable(true);
+    movingPlatform.body.allowGravity = false;
+    movingPlatform.setVelocityX(50);
+
+    player = this.physics.add.sprite(100, 450, 'dude');
+
+    player.setBounce(0.0);
+    player.setCollideWorldBounds(true);
+
+    cursors = this.input.keyboard.createCursorKeys();
+
+  
+    this.physics.add.collider(player, platforms);
+    this.physics.add.collider(player, movingPlatform);
+}
+
+function update ()
+{
+    //move to the sides
+    if (cursors.left.isDown)
+    {
+        player.setVelocityX(-160);
+    }
+    else if (cursors.right.isDown)
+    {
+        player.setVelocityX(160);
+    }
+    else
+    {
+        player.setVelocityX(0);
+    }
+
+    //jump
+    if (cursors.up.isDown) //&& player.body.touching.down)
+    {
+        player.setVelocityY(-220);
+    }
+
+    if (cursors.down.isDown) 
+    {
+        player.setVelocityY(420);
+    }
+
+    if (movingPlatform.x >= 500)
+    {
+        movingPlatform.setVelocityX(-50);
+    }
+    else if (movingPlatform.x <= 300)
+    {
+        movingPlatform.setVelocityX(50);
+    }
+}
