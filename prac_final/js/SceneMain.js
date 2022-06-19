@@ -48,7 +48,7 @@ function gameOver(){
 
 var config = {
     type: Phaser.AUTO,
-    width: 800,
+    width: 799,
     height: 600,
     parent: 'phaser-example',
     physics: {
@@ -86,18 +86,19 @@ function create ()
     platforms = this.physics.add.staticGroup();
 
     platforms.create(0, 568, 'ground').setScale(2).refreshBody();
-    platforms.create(100, 568, 'ground').setScale(2).refreshBody();
-    platforms.create(200, 568, 'ground').setScale(2).refreshBody();
-    platforms.create(300, 568, 'ground').setScale(2).refreshBody();
-    platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-    platforms.create(500, 568, 'ground').setScale(2).refreshBody();
-    platforms.create(600, 568, 'ground').setScale(2).refreshBody();
-    platforms.create(700, 568, 'ground').setScale(2).refreshBody();
-    platforms.create(800, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(42*2, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(42*4, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(42*6, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(42*8, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(42*10, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(42*12, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(42*14, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(42*16, 568, 'ground').setScale(2).refreshBody();
+    platforms.create(42*18, 568, 'ground').setScale(2).refreshBody();
 
     platforms.create(600, 400, 'ground').setScale(2).refreshBody();
     platforms.create(100, 250, 'ground').setScale(2).refreshBody();
-    platforms.create(750, 220, 'ground').setScale(2).refreshBody();
+    platforms.create(750, 250, 'ground').setScale(2).refreshBody();
 
     movingPlatform = this.physics.add.image(400, 400, 'ground');
     movingPlatform2 = this.physics.add.image(200, 300, 'ground');
