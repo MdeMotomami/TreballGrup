@@ -119,9 +119,10 @@ function create ()
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    let x = Math.random()*799;
+    let x = Math.random()*450;
+    let x2 = Math.random()*799;
     bat = this.physics.add.image(x, 10, 'bat');
-    bat2 = this.physics.add.image(x, 10, 'bat');
+    bat2 = this.physics.add.image(x2, 10, 'bat');
     movingPlatform2.setImmovable(true);
     movingPlatform2.body.allowGravity = false;
     movingPlatform2.setVelocityX(30);
@@ -184,40 +185,41 @@ function update ()
     //bat movement
     if (bat.x >= player.x)
     {
-        bat.setVelocityX(-50);
+        bat.setVelocityX(-45);
     }
     else if (bat.x <= player.x)
     {
-        bat.setVelocityX(50);
+        bat.setVelocityX(45);
     }
     if (bat.y >= player.y)
     {
-        bat.setVelocityY(-50);
+        bat.setVelocityY(-45);
     }
     else if (bat.y <= player.y)
     {
-        bat.setVelocityY(50);
+        bat.setVelocityY(45);
     }
 
+    //bat2
     if (bat2.x >= player.x)
     {
-        bat2.setVelocityX(-50);
+        bat2.setVelocityX(-70);
     }
     else if (bat2.x <= player.x)
     {
-        bat2.setVelocityX(50);
+        bat2.setVelocityX(70);
     }
     if (bat2.y >= player.y)
     {
-        bat2.setVelocityY(-50);
+        bat2.setVelocityY(-70);
     }
     else if (bat2.y <= player.y)
     {
-        bat.setVelocityY(50);
+        bat2.setVelocityY(70);
     }
 
     //contador d'enemics
-    if (counter >= 1)
+    if (counter >= 2)
         game_over()
 }
 
@@ -232,6 +234,7 @@ function collision(bat, player) {
         loadpage("./index.html")
     }
 }
+
 
 function game_over(){
     loadpage("./index.html")
