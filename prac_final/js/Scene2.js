@@ -224,7 +224,7 @@ function update ()
 }
 
 function collision(bat, player) {
-    if (cursors.down.isDown) 
+    if (cursors.down.isDown && player.body.touching.down == false) 
     {
         bat.disableBody(true, true)
         counter += 1;
@@ -237,5 +237,5 @@ function collision(bat, player) {
 
 
 function game_over(){
-    loadpage("./index.html")
+    loadpage("./phasergame3.html")
 }

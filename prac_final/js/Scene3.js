@@ -78,7 +78,7 @@ function preload ()
     this.load.image('sky', '/prac_final/assets/sky.png');
     this.load.image('ground', '/prac_final/assets/block1.png');
     this.load.image('dude', '/prac_final/assets/robotiko.png' );
-    this.load.image('bat', '/prac_final/assets/bat.png');
+    this.load.image('meatball', '/prac_final/assets/meatball.png');
 }
 
 function create ()
@@ -119,8 +119,10 @@ function create ()
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    let x = Math.random()*799;
-    bat = this.physics.add.image(x, 10, 'bat');
+    let x = Math.random()*450;
+    let x2 = Math.random()*799;
+    meatball = this.physics.add.image(x, 10, 'meatball');
+    meatball2 = this.physics.add.image(x2, 10, 'meatball');
     movingPlatform2.setImmovable(true);
     movingPlatform2.body.allowGravity = false;
     movingPlatform2.setVelocityX(30);
@@ -129,7 +131,8 @@ function create ()
     this.physics.add.collider(player, movingPlatform);
     this.physics.add.collider(player, movingPlatform2);
 
-    this.physics.add.overlap(bat, player, collision);
+    this.physics.add.overlap(meatball, player, collision);
+    this.physics.add.overlap(meatball2, player, collision);
 }
 
 
@@ -180,25 +183,43 @@ function update ()
     }
 
     //bat movement
-    if (bat.x >= player.x)
+    if (meatball.x >= player.x)
     {
-        bat.setVelocityX(-50);
+        meatball.setVelocityX(-75);
     }
-    else if (bat.x <= player.x)
+    else if (meatball.x <= player.x)
     {
-        bat.setVelocityX(50);
+        meatball.setVelocityX(75);
     }
-    if (bat.y >= player.y)
+    if (meatball.y >= player.y)
     {
-        bat.setVelocityY(-50);
+        meatball.setVelocityY(-65);
     }
-    else if (bat.y <= player.y)
+    else if (meatball.y <= player.y)
     {
-        bat.setVelocityY(50);
+        meatball.setVelocityY(65);
+    }
+
+    //bat2
+    if (meatball2.x >= player.x)
+    {
+        meatball2.setVelocityX(-100);
+    }
+    else if (meatball2.x <= player.x)
+    {
+        meatball2.setVelocityX(100);
+    }
+    if (meatball2.y >= player.y)
+    {
+        meatball2.setVelocityY(-80);
+    }
+    else if (meatball2.y <= player.y)
+    {
+        meatball2.setVelocityY(80);
     }
 
     //contador d'enemics
-    if (counter >= 1)
+    if (counter >= 2)
         game_over()
 }
 
@@ -214,6 +235,7 @@ function collision(bat, player) {
     }
 }
 
+
 function game_over(){
-    loadpage("./phasergame2.html")
+    loadpage("./phasergame3.html")
 }
