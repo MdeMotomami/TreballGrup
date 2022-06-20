@@ -223,10 +223,10 @@ function update ()
         game_over()
 }
 
-function collision(bat, player) {
-    if (cursors.down.isDown && player.body.touching.down == false) 
+function collision(meatball, player) {
+    if (cursors.down.isDown) 
     {
-        bat.disableBody(true, true)
+        meatball.disableBody(true, true)
         counter += 1;
     }
     else{
