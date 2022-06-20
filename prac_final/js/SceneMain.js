@@ -203,7 +203,7 @@ function update ()
 }
 
 function collision(bat, player) {
-    if (cursors.down.isDown && player.body.touching.down == false) 
+    if (cursors.down.isDown) 
     {
         bat.disableBody(true, true)
         counter += 1;
