@@ -76,7 +76,8 @@ function preload ()
 {
     this.load.image('sky', '/prac_final/assets/sky.png');
     this.load.image('ground', '/prac_final/assets/block1.png');
-    this.load.image('dude', '/prac_final/assets/robotiko.png' )
+    this.load.image('dude', '/prac_final/assets/robotiko.png' );
+    this.load.image('bat', '/prac_final/assets/bat.png');
 }
 
 function create ()
@@ -117,10 +118,15 @@ function create ()
 
     cursors = this.input.keyboard.createCursorKeys();
 
-  
+    bat = this.physics.add.image(400, 400, 'bat');
+    movingPlatform2.setImmovable(true);
+    movingPlatform2.body.allowGravity = false;
+    movingPlatform2.setVelocityX(30);
+
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(player, movingPlatform);
     this.physics.add.collider(player, movingPlatform2);
+    this.physics.add.collider(player, bat);
 }
 
 function update ()
@@ -166,5 +172,23 @@ function update ()
     else if (movingPlatform2.x <= 200)
     {
         movingPlatform2.setVelocityX(50);
+    }
+
+    //bat movement
+    if (bat.x >= player.x)
+    {
+        bat.setVelocityX(-50);
+    }
+    else if (bat.x <= player.x)
+    {
+        bat.setVelocityX(50);
+    }
+    if (bat.y >= player.y)
+    {
+        bat.setVelocityY(-50);
+    }
+    else if (bat.y <= player.y)
+    {
+        bat.setVelocityY(50);
     }
 }
