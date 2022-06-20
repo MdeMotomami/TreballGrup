@@ -121,6 +121,7 @@ function create ()
 
     let x = Math.random()*799;
     bat = this.physics.add.image(x, 10, 'bat');
+    bat2 = this.physics.add.image(x, 10, 'bat');
     movingPlatform2.setImmovable(true);
     movingPlatform2.body.allowGravity = false;
     movingPlatform2.setVelocityX(30);
@@ -130,6 +131,7 @@ function create ()
     this.physics.add.collider(player, movingPlatform2);
 
     this.physics.add.overlap(bat, player, collision);
+    this.physics.add.overlap(bat2, player, collision);
 }
 
 
@@ -197,6 +199,23 @@ function update ()
         bat.setVelocityY(50);
     }
 
+    if (bat2.x >= player.x)
+    {
+        bat2.setVelocityX(-50);
+    }
+    else if (bat2.x <= player.x)
+    {
+        bat2.setVelocityX(50);
+    }
+    if (bat2.y >= player.y)
+    {
+        bat2.setVelocityY(-50);
+    }
+    else if (bat2.y <= player.y)
+    {
+        bat.setVelocityY(50);
+    }
+
     //contador d'enemics
     if (counter >= 1)
         game_over()
@@ -215,5 +234,5 @@ function collision(bat, player) {
 }
 
 function game_over(){
-    loadpage("./phasergame2.html")
+    loadpage("./index.html")
 }
