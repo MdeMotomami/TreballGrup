@@ -126,8 +126,11 @@ function create ()
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(player, movingPlatform);
     this.physics.add.collider(player, movingPlatform2);
-    this.physics.add.collider(player, bat);
+
+    this.physics.add.overlap(bat, player, collision);
 }
+
+
 
 function update ()
 {
@@ -190,5 +193,17 @@ function update ()
     else if (bat.y <= player.y)
     {
         bat.setVelocityY(50);
+    }
+
+}
+
+function collision(bat, player) {
+    if (cursors.down.isDown) 
+    {
+        bat.disableBody(true, true)
+    }
+    else{
+        player.disableBody(true, true);
+        loadpage("./index.html")
     }
 }
