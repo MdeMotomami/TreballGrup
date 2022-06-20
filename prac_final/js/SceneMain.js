@@ -79,6 +79,11 @@ function preload ()
     this.load.image('dude', '/prac_final/assets/robotiko.png' );
     this.load.image('bat', '/prac_final/assets/bat.png');
 }
+fucntion spawner()
+{
+    let x = Math.random()*799;
+    bat = this.physics.add.image(x, 10, 'bat');
+}
 
 function create ()
 {
@@ -118,7 +123,8 @@ function create ()
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    bat = this.physics.add.image(400, 400, 'bat');
+    let x = Math.random()*799;
+    bat = this.physics.add.image(x, 10, 'bat');
     movingPlatform2.setImmovable(true);
     movingPlatform2.body.allowGravity = false;
     movingPlatform2.setVelocityX(30);
