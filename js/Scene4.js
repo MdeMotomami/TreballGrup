@@ -59,6 +59,7 @@ function create ()
     player.setCollideWorldBounds(true);
 
     cursors = this.input.keyboard.createCursorKeys();
+    keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
     spider = this.physics.add.image(700, 400, 'spider');
 
