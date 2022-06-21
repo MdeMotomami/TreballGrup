@@ -134,12 +134,12 @@ function collision(spider, player) {
     }
     else{
         player.disableBody(true, true);
-        loadpage("./gameover.html")
+        loadpage("../html/gameover.html")
     }
 }
 
 function win(){
-    loadpage("./final.html")
+    loadpage("../html/final.html")
 }
 
 function pauseGame() {
