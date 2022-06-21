@@ -75,10 +75,10 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('sky', '/prac_final/assets/sky.png');
-    this.load.image('ground', '/prac_final/assets/block1.png');
-    this.load.image('dude', '/prac_final/assets/robotiko.png' );
-    this.load.image('spider', '/prac_final/assets/spider.png');
+    this.load.image('sky', '../assets/sky.png');
+    this.load.image('ground', '../assets/block1.png');
+    this.load.image('dude', '../assets/robotiko.png' );
+    this.load.image('spider', '../assets/spider.png');
 }
 
 function create ()
