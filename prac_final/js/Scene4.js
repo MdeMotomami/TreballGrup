@@ -98,20 +98,6 @@ function create ()
     platforms.create(42*16, 568, 'ground').setScale(2).refreshBody();
     platforms.create(42*18, 568, 'ground').setScale(2).refreshBody();
 
-    platforms.create(600, 400, 'ground').setScale(2).refreshBody();
-    platforms.create(100, 250, 'ground').setScale(2).refreshBody();
-    platforms.create(750, 250, 'ground').setScale(2).refreshBody();
-
-    movingPlatform = this.physics.add.image(400, 400, 'ground');
-    movingPlatform2 = this.physics.add.image(200, 300, 'ground');
-
-    movingPlatform.setImmovable(true);
-    movingPlatform.body.allowGravity = false;
-    movingPlatform.setVelocityX(50);
-    movingPlatform2.setImmovable(true);
-    movingPlatform2.body.allowGravity = false;
-    movingPlatform2.setVelocityX(50);
-
     player = this.physics.add.sprite(200, 450, 'dude');
 
     player.setBounce(0.0);
@@ -121,13 +107,8 @@ function create ()
 
     let x = Math.random()*799;
     spider = this.physics.add.image(x, 10, 'spider');
-    movingPlatform2.setImmovable(true);
-    movingPlatform2.body.allowGravity = false;
-    movingPlatform2.setVelocityX(30);
 
     this.physics.add.collider(player, platforms);
-    this.physics.add.collider(player, movingPlatform);
-    this.physics.add.collider(player, movingPlatform2);
     this.physics.add.collider(spider, platforms);
 
     this.physics.add.overlap(spider, player, collision);
