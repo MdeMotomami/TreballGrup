@@ -195,12 +195,12 @@ function collision(meatball, player) {
     }
     else{
         player.disableBody(true, true);
-        loadpage("./gameover.html")
+        loadpage("../html/gameover.html")
     }
 }
 
 function canvi_fase(){
-    loadpage("./phasergame4.html")
+    loadpage("../html/phasergame4.html")
 }
 
 function pauseGame() {
