@@ -159,8 +159,7 @@ function update ()
 
 
     //contador d'enemics
-    if (counter >= 1)
-        game_over()
+    if (counter >= 1) win()
 }
 
 function collision(spider, player) {
@@ -171,10 +170,10 @@ function collision(spider, player) {
     }
     else{
         player.disableBody(true, true);
-        loadpage("./index.html")
+        loadpage("./gameover.html")
     }
 }
 
-function game_over(){
-    loadpage("./index.html")
+function win(){
+    loadpage("./final.html")
 }

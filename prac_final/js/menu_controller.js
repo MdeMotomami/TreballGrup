@@ -26,6 +26,10 @@ function options(){
 }
 
 function load(){
-	loadpage("./html/load.html");
+	loadpage("./load.html");
+}
+
+function GoToMenu(){
+	loadpage("./index.html");
 }
 

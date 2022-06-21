@@ -25,6 +25,11 @@ p{
 	text-align: center;
 }
 
+svg{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 button.menu-object:active{
 	font-size: 18px;

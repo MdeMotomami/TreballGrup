@@ -219,8 +219,7 @@ function update ()
     }
 
     //contador d'enemics
-    if (counter >= 2)
-        game_over()
+    if (counter >= 2) canvi_fase()
 }
 
 function collision(meatball, player) {
@@ -231,11 +230,11 @@ function collision(meatball, player) {
     }
     else{
         player.disableBody(true, true);
-        loadpage("./index.html")
+        loadpage("./gameover.html")
     }
 }
 
 
-function game_over(){
+function canvi_fase(){
     loadpage("./phasergame4.html")
 }

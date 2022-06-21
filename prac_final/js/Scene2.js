@@ -1,22 +1,6 @@
 var isPaused = false;
 var isGameOver = false;
 
-function runGame(){
-    if (condicio_mort){
-        clearInterval(interval);
-        gameOver();
-        return;
-    }
-}
-
-document.addEventListener('keyup', function(e)
-{
-    if(e.which == 32 && isGameOver == false){
-        if(isPaused) resumeGame();
-        else pauseGame()
-    }
-});
-
 function pauseGame(){
     clearInterval(interval);
     isPaused = true;
@@ -33,17 +17,6 @@ function resumeGame(){
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
     canvas.style.opacity = 1;
     interval = setInterval(runGame, 20);
-}
-
-function gameOver(){
-    isGameOver = true;
-    canvas.style.opacity = 0.5;
-    canvasContext.font = "90px tahoma";
-    canvasContext.fillStyle = "white";
-    canvasContext.textAlign = "center";
-    canvasContext.textBaseline = "middle";
-    canvasContext.fillText("Game Over", 400, 170);
-    canvasContext.fillText("You Scored" + score, 400, 330);
 }
 
 var config = {
@@ -219,8 +192,7 @@ function update ()
     }
 
     //contador d'enemics
-    if (counter >= 2)
-        game_over()
+    if (counter >= 2) canvi_fase()
 }
 
 function collision(bat, player) {
@@ -231,11 +203,11 @@ function collision(bat, player) {
     }
     else{
         player.disableBody(true, true);
-        loadpage("./index.html")
+        loadpage("./gameover.html")
     }
 }
 
 
-function game_over(){
+function canvi_fase(){
     loadpage("./phasergame3.html")
 }

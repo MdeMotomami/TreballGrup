@@ -1,51 +1,3 @@
-var isPaused = false;
-var isGameOver = false;
-
-function runGame(){
-    if (condicio_mort){
-        clearInterval(interval);
-        gameOver();
-        return;
-    }
-}
-
-document.addEventListener('keyup', function(e)
-{
-    if(e.which == 32 && isGameOver == false){
-        if(isPaused) resumeGame();
-        else pauseGame()
-    }
-});
-
-function pauseGame(){
-    clearInterval(interval);
-    isPaused = true;
-    canvas.style.opacity = 0.5;
-    canvasContext.font = "90px tahoma";
-    canvasContext.fillStyle = "white";
-    canvasContext.textAlign = "center";
-    canvasContext.textBaseline = "middle";
-    canvasContext.fillText("Game Paused", 400, 250);
-}
-
-function resumeGame(){
-    isPaused = false;
-    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-    canvas.style.opacity = 1;
-    interval = setInterval(runGame, 20);
-}
-
-function gameOver(){
-    isGameOver = true;
-    canvas.style.opacity = 0.5;
-    canvasContext.font = "90px tahoma";
-    canvasContext.fillStyle = "white";
-    canvasContext.textAlign = "center";
-    canvasContext.textBaseline = "middle";
-    canvasContext.fillText("Game Over", 400, 170);
-    canvasContext.fillText("You Scored" + score, 400, 330);
-}
-
 var config = {
     type: Phaser.AUTO,
     width: 799,
@@ -58,7 +10,7 @@ var config = {
             debug: false
         }
     },
-    scene: {
+    scene:{
         preload: preload,
         create: create,
         update: update
@@ -70,8 +22,12 @@ var platforms;
 var cursors;
 var movingPlatform;
 var counter = 0;
+var keyP;
+var isPaused = false;
+var isGameOver = false;
 
 var game = new Phaser.Game(config);
+
 
 function preload ()
 {
@@ -118,6 +74,8 @@ function create ()
     player.setCollideWorldBounds(true);
 
     cursors = this.input.keyboard.createCursorKeys();
+    keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+    keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
     let x = Math.random()*799;
     bat = this.physics.add.image(x, 10, 'bat');
@@ -132,10 +90,16 @@ function create ()
     this.physics.add.overlap(bat, player, collision);
 }
 
-
-
 function update ()
 {
+    
+    if(keyP.isDown) {
+        if (!isPaused){
+            pauseGame();
+        }
+    }
+    
+    
     //move to the sides
     if (cursors.left.isDown)
     {
@@ -198,8 +162,8 @@ function update ()
     }
 
     //contador d'enemics
-    if (counter >= 1)
-        game_over()
+    if (counter >= 1) canvi_fase();
+    
 }
 
 function collision(bat, player) {
@@ -210,10 +174,22 @@ function collision(bat, player) {
     }
     else{
         player.disableBody(true, true);
-        loadpage("./index.html")
+        loadpage("./gameover.html")
     }
 }
 
-function game_over(){
+function canvi_fase(){
     loadpage("./phasergame2.html")
 }
+
+function pauseGame() {
+    isPaused = true;
+    this.scene.pause();
+    this.scene.launch('sceneB');
+}
+
+function resumeGame(){
+    isPaused = false;
+    this.scene.resume();
+}
+
