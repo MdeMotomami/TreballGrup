@@ -1,51 +1,3 @@
-var isPaused = false;
-var isGameOver = false;
-
-function runGame(){
-    if (condicio_mort){
-        clearInterval(interval);
-        gameOver();
-        return;
-    }
-}
-
-document.addEventListener('keyup', function(e)
-{
-    if(e.which == 32 && isGameOver == false){
-        if(isPaused) resumeGame();
-        else pauseGame()
-    }
-});
-
-function pauseGame(){
-    clearInterval(interval);
-    isPaused = true;
-    canvas.style.opacity = 0.5;
-    canvasContext.font = "90px tahoma";
-    canvasContext.fillStyle = "white";
-    canvasContext.textAlign = "center";
-    canvasContext.textBaseline = "middle";
-    canvasContext.fillText("Game Paused", 400, 250);
-}
-
-function resumeGame(){
-    isPaused = false;
-    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-    canvas.style.opacity = 1;
-    interval = setInterval(runGame, 20);
-}
-
-function gameOver(){
-    isGameOver = true;
-    canvas.style.opacity = 0.5;
-    canvasContext.font = "90px tahoma";
-    canvasContext.fillStyle = "white";
-    canvasContext.textAlign = "center";
-    canvasContext.textBaseline = "middle";
-    canvasContext.fillText("Game Over", 400, 170);
-    canvasContext.fillText("You Scored" + score, 400, 330);
-}
-
 var config = {
     type: Phaser.AUTO,
     width: 799,
@@ -70,6 +22,9 @@ var platforms;
 var cursors;
 var movingPlatform;
 var counter = 0;
+var keyP;
+var isPaused = false;
+var isGameOver = false;
 
 var game = new Phaser.Game(config);
 
@@ -118,6 +73,7 @@ function create ()
     player.setCollideWorldBounds(true);
 
     cursors = this.input.keyboard.createCursorKeys();
+    keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
     let x = Math.random()*450;
     let x2 = Math.random()*799;
@@ -139,6 +95,15 @@ function create ()
 
 function update ()
 {
+    if(keyP.isDown) {
+        if (!isPaused){
+            pauseGame();
+        }
+        if (isPaused){
+            resumeGame();
+        }
+    }
+    
     //move to the sides
     if (cursors.left.isDown)
     {
@@ -234,7 +199,16 @@ function collision(meatball, player) {
     }
 }
 
-
 function canvi_fase(){
     loadpage("./phasergame4.html")
+}
+
+function pauseGame() {
+    isPaused = true;
+    this.scene.pause();
+}
+
+function resumeGame(){
+    isPaused = false;
+    this.scene.resume();
 }

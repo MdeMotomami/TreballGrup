@@ -1,51 +1,3 @@
-var isPaused = false;
-var isGameOver = false;
-
-function runGame(){
-    if (condicio_mort){
-        clearInterval(interval);
-        gameOver();
-        return;
-    }
-}
-
-document.addEventListener('keyup', function(e)
-{
-    if(e.which == 32 && isGameOver == false){
-        if(isPaused) resumeGame();
-        else pauseGame()
-    }
-});
-
-function pauseGame(){
-    clearInterval(interval);
-    isPaused = true;
-    canvas.style.opacity = 0.5;
-    canvasContext.font = "90px tahoma";
-    canvasContext.fillStyle = "white";
-    canvasContext.textAlign = "center";
-    canvasContext.textBaseline = "middle";
-    canvasContext.fillText("Game Paused", 400, 250);
-}
-
-function resumeGame(){
-    isPaused = false;
-    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-    canvas.style.opacity = 1;
-    interval = setInterval(runGame, 20);
-}
-
-function gameOver(){
-    isGameOver = true;
-    canvas.style.opacity = 0.5;
-    canvasContext.font = "90px tahoma";
-    canvasContext.fillStyle = "white";
-    canvasContext.textAlign = "center";
-    canvasContext.textBaseline = "middle";
-    canvasContext.fillText("Game Over", 400, 170);
-    canvasContext.fillText("You Scored" + score, 400, 330);
-}
-
 var config = {
     type: Phaser.AUTO,
     width: 799,
@@ -68,6 +20,9 @@ var config = {
 var player;
 var platforms;
 var cursors;
+var keyP;
+var isPaused = false;
+var isGameOver = false;
 
 var counter = 0;
 
@@ -118,6 +73,15 @@ function create ()
 
 function update ()
 {
+    if(keyP.isDown) {
+        if (!isPaused){
+            pauseGame();
+        }
+        if (isPaused){
+            resumeGame();
+        }
+    }    
+
     //move to the sides
     if (cursors.left.isDown)
     {
@@ -176,4 +140,14 @@ function collision(spider, player) {
 
 function win(){
     loadpage("./final.html")
+}
+
+function pauseGame() {
+    isPaused = true;
+    this.scene.pause();
+}
+
+function resumeGame(){
+    isPaused = false;
+    this.scene.resume();
 }

@@ -75,7 +75,6 @@ function create ()
 
     cursors = this.input.keyboard.createCursorKeys();
     keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
-    keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
     let x = Math.random()*799;
     bat = this.physics.add.image(x, 10, 'bat');
@@ -92,13 +91,14 @@ function create ()
 
 function update ()
 {
-    
     if(keyP.isDown) {
         if (!isPaused){
             pauseGame();
         }
+        if (isPaused){
+            resumeGame();
+        }
     }
-    
     
     //move to the sides
     if (cursors.left.isDown)
@@ -185,7 +185,6 @@ function canvi_fase(){
 function pauseGame() {
     isPaused = true;
     this.scene.pause();
-    this.scene.launch('sceneB');
 }
 
 function resumeGame(){

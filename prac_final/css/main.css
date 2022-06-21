@@ -7,8 +7,12 @@ input[type=number]{
 }
 
 #title{
-	font-size: 26px;
+	font-size: 37px;
 	line-height: 75px;
+}
+
+body#menu{
+	background-color: #FFDB58;
 }
 
 .menu-object{
@@ -19,6 +23,7 @@ input[type=number]{
 	height: 75px;
 	font-size: 16px;
 	margin-top: 10px;
+	font-family: Stencil Std, fantasy;
 }
 
 p{
@@ -26,6 +31,12 @@ p{
 }
 
 svg{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+svg:hover{
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -43,3 +54,12 @@ button.menu-object:hover:not(:active){
 	height: 85px;
 }
 
+.menu-object#gameover{
+	font-size: 100px;
+	margin-top: 30px;
+	margin-bottom: 185px;
+}
+
+#game_area{
+	background-color: skyblue;
+}
