@@ -68,7 +68,7 @@ var config = {
 var player;
 var platforms;
 var cursors;
-var movingPlatform;
+
 var counter = 0;
 
 var game = new Phaser.Game(config);
@@ -105,8 +105,8 @@ function create ()
 
     cursors = this.input.keyboard.createCursorKeys();
 
-    let x = Math.random()*799;
-    spider = this.physics.add.image(x, 10, 'spider');
+    spider = this.physics.add.image(700, 400, 'spider');
+
 
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(spider, platforms);
@@ -143,38 +143,21 @@ function update ()
         player.setVelocityY(420);
     }
 
-    if (movingPlatform.x >= 500)
-    {
-        movingPlatform.setVelocityX(-50);
-    }
-    else if (movingPlatform.x <= 300)
-    {
-        movingPlatform.setVelocityX(50);
-    }
-
-    if (movingPlatform2.x >= 600)
-    {
-        movingPlatform2.setVelocityX(-50);
-    }
-    else if (movingPlatform2.x <= 200)
-    {
-        movingPlatform2.setVelocityX(50);
-    }
 
     //bat movement
     if (spider.x >= player.x)
     {
-        spider.setVelocityX(-50);
+        spider.setVelocityX(-70);
     }
     else if (spider.x <= player.x)
     {
-        spider.setVelocityX(50);
+        spider.setVelocityX(70);
     }
-    if (spider.body.touching.down)
-    {
-        spider.setVelocityY(-320);
+    if (spider.body.touching.down){
+        spider.setVelocityY(-350);
     }
- 
+
+
     //contador d'enemics
     if (counter >= 1)
         game_over()
@@ -183,13 +166,8 @@ function update ()
 function collision(spider, player) {
     if (cursors.down.isDown) 
     {
-        if (player.body.touching.down){
-            counter=counter;
-        }
-        else{
-            spider.disableBody(true, true)
-            counter += 1;
-        }
+        spider.disableBody(true, true)
+        counter += 1;
     }
     else{
         player.disableBody(true, true);
@@ -198,5 +176,5 @@ function collision(spider, player) {
 }
 
 function game_over(){
-    loadpage("./phasergame4.html")
+    loadpage("./index.html")
 }
