@@ -7,11 +7,11 @@ function start_game(){
 }
 
 function SceneMain(){
-	loadpage("../html/phasergame.html");
+	loadpage("./html/phasergame.html");
 }
 
 function Scene2(){
-	loadpage("../html/phasergame2.html");
+	loadpage("./html/phasergame2.html");
 }
 
 function exit (){
@@ -21,15 +21,11 @@ function exit (){
 	name = "";
 }
 
-function options(){
-	loadpage("./html/options.html");
-}
-
 function load(){
-	loadpage("./load.html");
+	loadpage("./html/load.html");
 }
 
 function GoToMenu(){
-	loadpage("./index.html");
+	loadpage("../index.html");
 }
 
