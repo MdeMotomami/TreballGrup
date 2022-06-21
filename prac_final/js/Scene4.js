@@ -78,7 +78,7 @@ function preload ()
     this.load.image('sky', '/prac_final/assets/sky.png');
     this.load.image('ground', '/prac_final/assets/block1.png');
     this.load.image('dude', '/prac_final/assets/robotiko.png' );
-    this.load.image('bat', '/prac_final/assets/bat.png');
+    this.load.image('spider', '/prac_final/assets/spider.png');
 }
 
 function create ()
@@ -120,7 +120,7 @@ function create ()
     cursors = this.input.keyboard.createCursorKeys();
 
     let x = Math.random()*799;
-    bat = this.physics.add.image(x, 10, 'bat');
+    spider = this.physics.add.image(x, 10, 'spider');
     movingPlatform2.setImmovable(true);
     movingPlatform2.body.allowGravity = false;
     movingPlatform2.setVelocityX(30);
@@ -128,8 +128,9 @@ function create ()
     this.physics.add.collider(player, platforms);
     this.physics.add.collider(player, movingPlatform);
     this.physics.add.collider(player, movingPlatform2);
+    this.physics.add.collider(spider, platforms);
 
-    this.physics.add.overlap(bat, player, collision);
+    this.physics.add.overlap(spider, player, collision);
 }
 
 
@@ -180,21 +181,21 @@ function update ()
     }
 
     //bat movement
-    if (bat.x >= player.x)
+    if (spider.x >= player.x)
     {
-        bat.setVelocityX(-50);
+        spider.setVelocityX(-50);
     }
-    else if (bat.x <= player.x)
+    else if (spider.x <= player.x)
     {
-        bat.setVelocityX(50);
+        spider.setVelocityX(50);
     }
-    if (bat.y >= player.y)
+    if (spider.y >= player.y)
     {
-        bat.setVelocityY(-50);
+        spider.setVelocityY(-50);
     }
-    else if (bat.y <= player.y)
+    else if (spider.y <= player.y)
     {
-        bat.setVelocityY(50);
+        spider.setVelocityY(50);
     }
 
     //contador d'enemics
@@ -202,11 +203,16 @@ function update ()
         game_over()
 }
 
-function collision(bat, player) {
+function collision(spider, player) {
     if (cursors.down.isDown) 
     {
-        bat.disableBody(true, true)
-        counter += 1;
+        if (player.body.touching.down){
+            counter=counter;
+        }
+        else{
+            spider.disableBody(true, true)
+            counter += 1;
+        }
     }
     else{
         player.disableBody(true, true);
@@ -215,5 +221,5 @@ function collision(bat, player) {
 }
 
 function game_over(){
-    loadpage("./phasergame2.html")
+    loadpage("./phasergame4.html")
 }
