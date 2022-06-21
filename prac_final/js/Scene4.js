@@ -170,15 +170,11 @@ function update ()
     {
         spider.setVelocityX(50);
     }
-    if (spider.y >= player.y)
+    if (spider.body.touching.down)
     {
-        spider.setVelocityY(-50);
+        spider.setVelocityY(-320);
     }
-    else if (spider.y <= player.y)
-    {
-        spider.setVelocityY(50);
-    }
-
+ 
     //contador d'enemics
     if (counter >= 1)
         game_over()
